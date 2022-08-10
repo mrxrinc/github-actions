@@ -1,6 +1,13 @@
 name: actions workflow
 
-on: [push]
+on:
+  repository_dispatch:
+    types: [build]
+  # schedule:
+  #   - cron: "0/5 * * * *"
+  #   - cron: "0/6 * * * *"
+  pull_request:
+    types: [closed, opened, reopened, assigned]
 
 jobs:
   run-github-actions:
@@ -14,9 +21,6 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
-          echo "${{ github }}"
-          echo "=========="
-          echo "${{GITHUB}}"
       - name: Checkout
         uses: actions/checkout@v1
       - name: List Files

@@ -1,8 +1,24 @@
 name: actions workflow
 
 on:
-  repository_dispatch:
-    types: [build]
+  push:
+    branches:
+      - master
+      - "feature/*"
+      - "feature/**"
+      - "!feature/featC"
+    # branches-ignore:
+    #   - "ignoredBranch/*"
+    tags:
+      - v1
+      - "v1.**"
+    # tags-ignore:
+    #   - v2
+    paths:
+      - "**.js" # on push any js files
+      - "!docs/**" # don't run on any docs change
+  # repository_dispatch:
+  #   types: [build]
   # schedule:
   #   - cron: "0/5 * * * *"
   #   - cron: "0/6 * * * *"

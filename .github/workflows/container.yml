@@ -4,10 +4,21 @@ on: push
 jobs:
   node-docker:
     runs-on: ubuntu-latest
-    container:
-      image: node:16-alpine3.15
+    # container:
+    #   image: node:16-alpine3.15
+    services:
+      app:
+        image: alialaa17/node-api
+        ports:
+          - 3001:3000
+      mongo:
+        image: mongo
+        ports:
+          - "27017:27017"
     steps:
-      - name: log node version and os
-        run: |
-          node -v
-          cat /etc/os-release
+      - name: Post a user
+        run:
+          'curl -X POST http: //localhost:3001/api/user -H ''Content-Type: application/json'' - ''
+          {"username": "hello", "address": "world"}'''
+      - name: Get Users
+        run: curl http://localhost:3001/api/users

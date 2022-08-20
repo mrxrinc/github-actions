@@ -25,6 +25,7 @@ jobs:
         with:
           entrypoint: ./script.sh
           args: "Some string"
+        if: always()
       - name: Send Slack message
         uses: docker://technosophos/slack-notify
         env:
